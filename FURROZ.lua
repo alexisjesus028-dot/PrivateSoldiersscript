@@ -2,6 +2,7 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
+local TeleportService = game:GetService("TeleportService")
 
 local player = Players.LocalPlayer
 
@@ -44,7 +45,7 @@ Tab:CreateSlider({
 	end
 })
 
---// TOGGLE
+--// RUN TOGGLE
 Tab:CreateToggle({
 	Name = "RUN",
 	CurrentValue = false,
@@ -75,6 +76,21 @@ Tab:CreateToggle({
 			connection = nil
 			accumulator = 0
 		end
+	end
+})
+
+--// INSTA REJOIN BUTTON
+Tab:CreateButton({
+	Name = "⚡ Insta Rejoin",
+	Callback = function()
+		Rayfield:Notify({
+			Title = "Insta Rejoin",
+			Content = "Reentrando al servidor...",
+			Duration = 2
+		})
+
+		task.wait(0.2)
+		TeleportService:Teleport(game.PlaceId, player)
 	end
 })
 
